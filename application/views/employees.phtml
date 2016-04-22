@@ -1,0 +1,26 @@
+
+<div id ='employees'>
+<? if (!empty($employees)): ?>   
+<table >
+     <div > 
+    <a href="<?=PRJ_URL?>/index/index">home page</a>
+</div>
+    <? foreach($employees as $employee): ?>
+    <tr>
+        <td><a href="mailto:<?=$employee->email?>"> <?=$employee->name?></a></td>
+        <td><a href="<?=PRJ_URL?>/employees/delete/id/<?=$employee->id?> "onclick="return confirm('Delete Employee <?=$employee->name?>?')">REMOVE</a></td>
+        <td><a href="<?=PRJ_URL?>/employees/editForm/id/<?=$employee->id?>">EDIT</a></td>
+    </tr>
+    <? endforeach; ?>
+   
+    
+</table>
+<? else: ?>
+    <div>No employees in the database</div>
+<? endif; ?>    
+<div class="button"> 
+    <a href="<?=PRJ_URL?>/employees/addForm">Add a new employee</a>
+</div>
+   
+</div>
+<div class='clear'> </div>

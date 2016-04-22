@@ -1,0 +1,95 @@
+
+<div id="outer">
+        <div id="boardrooms">
+		<ul>
+                    <? foreach (range(1,BOARDROOMS_COUNT) as $num): ?>
+                        <li <? if($num == 1): ?> class="first" <? endif; ?>>
+                            <a href="<?=PRJ_URL?>/index/index/boardroom/<?=$num?>/month/<?=$calendar['month']?>/year/<?=$calendar['year']?>">
+                                Boardroom&nbsp;<?=$num?>
+                            </a>
+                            <? if($num % 5 == 0): ?> <br> <?endif; ?>
+                        </li>
+			
+                    <? endforeach; ?>    
+		</ul>
+	</div>
+    
+    
+	<div id="header">
+		<h1>Boardroom Booker</h1>
+		<h2 id="currentroom">Boardroom <?=$boardroom ?></h2>
+	</div>
+        <div id="month">
+
+            <span><a href="<?=PRJ_URL?>/index/index/boardroom/<?=$boardroom?>/month/<?=$calendar['prev_month']?>/year/<?if($calendar['prev_month'] == 12):?><?=($calendar['year']-1)?><?else:?><?=$calendar['year']?><?endif;?>"> 
+                    < 
+                  </a>
+            </span>
+            <span><?=$calendar['month_name']?></span>
+             <span><?=$calendar['year']?></span>
+             <span><a href="<?=PRJ_URL?>/index/index/boardroom/<?=$boardroom?>/month/<?=$calendar['next_month']?>/year/<?if($calendar['next_month'] == 1):?><?=$calendar['year']+1?><?else:?><?=$calendar['year']?><?endif;?>" >  
+                     > 
+                   </a></span>
+	</div>
+
+	
+
+	<div id="content">
+		<div id="primaryContentContainer">
+			<div id="primaryContent">
+				
+				<div id="calendar_container">
+                                  
+
+                                    <table>
+                                        <tr>
+                                            <? foreach(Calendar::getDaysWeek() as $day): ?>
+                                                 <th><?=$day?></th>
+                                            <? endforeach; ?>
+                                            
+                                        </tr>
+                                        <? foreach($calendar['month_days'] as $week): ?>
+                                       
+                                        <tr>
+                                            <? foreach($week as $day): ?>
+                                            <td>
+                                                <? if($day):?>
+                                                <?=$day?><br>
+                                                    <? if (isset($books[$day])): ?>
+                                                        <? foreach($books[$day] as $book): ?>
+                                                            <a href="#"
+                                                             onclick="window.open('<?=PRJ_URL?>/index/bookStatistic/id/<?=$book->id?>','Statistic','Left=200,Top=200, Width=450,Height=450,toolbar=yes,menubar=yes');"  >
+                                                                <? if(TIME_FORMAT == 12): ?> 
+                                                                    <?=date('h:i A',$book->start_time) ?>&nbsp;-&nbsp;<?=date('h:i A',$book->end_time) ?><br><br>  
+                                                                <? else: ?>
+                                                                    <?=date('H:i',$book->start_time) ?>&nbsp;-&nbsp;<?=date('H:i',$book->end_time) ?><br><br>
+                                                                <? endif; ?>
+                                                            </a>
+                                                        <? endforeach; ?>
+                                                    <? endif; ?>
+                                                <? endif;?>
+                                            </td>
+                                            <? endforeach; ?>
+
+                                        </tr>
+                                        <? endforeach; ?>
+                                        
+                                </table>
+                                
+				</div>
+				 <div id="but">
+					<span id="but_1"><a href="<?=PRJ_URL?>/index/bookForm/boardroom/<?=$boardroom?>" > Book It! </a></span>
+					<span id="but_2"><a href="<?=PRJ_URL?>/employees/index" > Employee List </a></span>
+				</div>   
+				
+				<div class="clear"></div>
+				
+				
+			</div>
+		</div>
+	<div class="clear"></div>
+	</div>
+	
+</div>
+
+

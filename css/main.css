@@ -1,0 +1,320 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a {
+   text-decoration: none;
+}
+#outer
+{
+    background-color: #8FBC8F;
+}
+
+#header, #month ,#header_bookform, #err{
+    margin: 20px 20px 30px 20px;
+    
+}
+
+#header h1 
+{
+    background-color: #2E8B57;
+    display: inline;
+    padding: 10px;
+    font-weight: lighter;
+    font-size: x-large;
+    color: Black;
+
+}
+#header_bookform h1
+{
+    display: inline;
+    padding: 10px;
+    font-weight: lighter;
+    font-size: x-large;
+    color: Black;
+}
+#header h2, #header_bookform h2, #success_text 
+{
+    border-color: Black;
+    border-style: solid;
+    border-spacing: 10px;
+    border-width: 1px;
+    display: inline;
+    padding: 5px 10px;
+    font-weight: lighter;
+    font-size: large;
+    color: Black;
+}
+
+
+#month 
+{
+    background-color: #ccffcc;
+    display: inline;
+    padding: 10px;
+    font-weight: lighter;
+    font-size: x-large;
+    color: Black;
+}
+
+#boardrooms
+{
+    background-color: #ccffcc;
+    
+    text-align: center;
+    height: 2em;
+    vertical-align: middle;
+}
+
+#boardrooms ul
+{
+    
+    list-style: none;
+    padding: 8px 0px 0px;
+
+}
+#boardrooms li
+{ 
+   
+    display: inline;
+    border-left: dotted 1px #848484;
+    padding-left: 0.8em;
+    padding-right: 0.5em;
+}
+#boardrooms li.first
+{
+    border-left: none;
+}
+#boardrooms a, #month a, #but a{
+    color: crimson;   
+}
+#content
+{
+	
+	margin-top: 1px;
+	padding-top: 1.5em;
+}
+
+
+
+#content div#but span{
+    display: block;
+    background-color: #ccffcc;
+    padding: 5px 10px;
+    margin: 1em 0.5em 1em 0em;
+    font-weight: lighter;
+    font-size: large;
+    color: black;
+    text-align: center;
+    min-width: 110px;
+    max-width: 110px;
+}
+#calendar_container {
+    
+    float: left;
+}
+#calendar_container a{
+    text-decoration: underline;
+}
+
+div#but {
+    float: left;
+    margin: 5px;
+}
+
+#content table {
+    border-collapse: collapse;
+}
+
+#content table th,#content table td {
+	
+	
+	border-style: solid;
+	border-width: 2px;
+	/*max-width: 100px;*/
+        vertical-align: top;
+        padding: 5px;
+	background-color: #FDFDFD;        
+}
+
+
+#primaryContent {
+	margin: 0em 0em 0em 0em;
+	padding: 1.5em;
+	padding-top: 0px;
+	border-left: dotted 1px #cacaca;
+}
+
+
+#employees table{
+    border-collapse: collapse;
+}
+#employees td {
+    padding: 10px;
+/*    border: 1px solid black;*/
+}
+#employees td a {
+    text-decoration: underline;
+}
+#employees {
+    margin: 30px;
+    float: left; 
+    
+    
+}
+#employees div {
+   margin: 10px;
+  
+   text-align: center;
+}
+
+#addForm {
+    float: left;
+    /*background-color: #cacaca;*/     
+    margin: 30px;   
+}
+#addForm h2 {
+    margin: 10px;
+     text-align: center;
+    
+}
+#addForm form div.field {
+    float:left;
+    margin: 20px;
+}
+.error {
+/*   color: red;*/
+}
+.success {
+    
+}
+#addForm div {
+    margin: 10px;
+    text-align: center;
+}
+#addForm div a, #currentroom a{
+    text-decoration: underline;
+}
+
+#bookform div {
+    margin: 20px;
+}
+.event_time {
+    font-weight:bold;
+}
+
+#wrapper_statistic {
+    height: 450px;
+    width: 450px;
+    background-color: #8FBC8F;
+}
+
+
+
+#details_header {
+    
+    padding:  20px;
+}
+
+#details_header div {
+     width:250px;
+     margin:0px auto;
+     background-color: #ccffcc;
+}
+
+#details_header div, #details .outer{
+    padding: 3px;
+    text-align: center;
+/*    background-color: #ccffcc;*/
+    border-color: Black;
+    border-style: solid;
+    border-width: 1px;
+}
+#details_header h2, #details .inner{
+    border-color: #848484;
+    border-style: solid;
+    margin:5px;
+    border-width: 1px;    
+}
+
+ #details .inner{
+    padding: 0px 10px;
+/*    background-color: #000000;*/
+   
+}
+ 
+#details .outer{
+    float:left;
+     background-color: #FFFFFF;
+    margin: 3px;
+}
+#details .outer.title {
+     background-color: #ccffcc;
+}
+#details .field input{
+    float:left;
+/*    background-color: #ccffcc;   */
+}
+#details .field {
+    
+/*    background-color: #ccffcc;   */
+}
+
+#details {
+    margin-left: 10px;
+}
+
+#recurring {
+    width: 200px;
+    background-color: #ccffcc;
+    padding: 10px 10px 10px 10px;
+    margin: 3px 3px 3px 60px;
+}
+
+
+.bold {
+   font-weight:bold;
+}
+#wrap_buttons {
+    float:left;
+    margin-left:  40px ;
+    
+}
+.button {
+    float:left;
+    padding: 10px;
+    margin: 5px 5px 5px 10px;
+    background-color:#C0C0C0;
+    
+}
+.button a {
+    color: #000;
+    text-decoration: none;    
+}
+
+.clear
+{
+    clear: both; 
+}
+#footer {
+  
+}
+
+#auth .fild_name{
+  margin: 10px;
+  width: 100px;
+  float:left;
+ 
+}
+#auth {
+    padding:  60px;
+}
+#auth input{
+ 
+  margin: 10px;
+  
+  
+ 
+  
+}

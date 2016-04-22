@@ -1,0 +1,33 @@
+<div id='addForm'>
+    <h2>Add a new employee</h2>
+    <div class ="error">
+    <? if (!empty($error)): ?>
+        <? foreach ($error->getMsgsArr() as $msg): ?>
+            <?=$msg ?><br>
+        <? endforeach; ?>
+    <?  elseif(!empty($success)): ?>
+        <?=$success ?><br>
+    <? endif; ?>        
+    </div>
+
+    <form action="<?=PRJ_URL?>/employees/add"  method="POST">
+
+        <div class ="field"> 
+            1)Enter new employee name<br>
+            (required).<br><br> 
+            <input type="text" name="formData[name]" <? if (!empty($formData['name'])):?> value="<?=$formData['name']?>" <? endif; ?> >
+        </div>
+        <div class ="field"> 
+            2)Enter new employee e-mail<br>
+            (required).<br><br> 
+            <input type="text" name="formData[email]" <? if (!empty($formData['email'])):?> value="<?=$formData['email']?>" <? endif; ?> >
+        </div>
+
+        <div class="clear"></div>
+        <div><input type="submit" value="Add"></div>
+
+    </form>
+    <div><a href="<?=PRJ_URL?>/employees">go to page employees</a></div>
+</div>
+
+<div class="clear"></div>

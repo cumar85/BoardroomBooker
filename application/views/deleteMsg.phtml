@@ -1,0 +1,19 @@
+ 
+<? if(!empty($book)): ?>
+    <div id="header_bookform">
+                    <h1>Boardroom Booker</h1>
+                    <h2 id="currentroom"> Boardroom <?=$book->boardroom?> </h2>
+    </div>
+     <script> opener.location.reload(true) </script>    
+
+    <div class ="success">
+        <span> The event 
+            <span class="event_time"><?=date("H:i",$book->start_time);?></span> 
+            - 
+            <span class="event_time"><?=date("H:i",$book->end_time);?></span> has been deleted.
+        </span><br><br>
+
+    </div>     
+<? else: ?> 
+    The event  has been deleted.
+<? endif; ?>

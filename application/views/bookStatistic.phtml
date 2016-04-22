@@ -1,0 +1,111 @@
+
+<? if(!empty($book)): ?>
+<div id="wrapper_statistic" >
+
+<div id="details_header">
+    <div><h2>BB DETAILS</h2></div>
+</div>
+
+ 
+    
+    <form id="statistic_form" action="<?=PRJ_URL?>/index/bookUpdate" method="post" >
+    
+    <input type="hidden" name = "formData[id]" value="<?=$book->id?>">
+    <input type="hidden" name = "formData[recurring_id]" value="<?=$book->recurring_id?>">
+     <input type="hidden" name = "formData[boardroom]" value="<?=$book->boardroom?>">
+    <input type="hidden" name = "formData[start_time]" value="<?=$book->start_time?>">
+    <input type="hidden" name = "formData[end_time]" value="<?=$book->end_time?>">
+    <div id="details">
+        <? if (!empty($error)): ?>
+        <div class ="error" >
+            <? foreach ($error->getMsgsArr() as $msg): ?>
+                <?=$msg ?><br><br>
+            <? endforeach; ?>
+        </div> 
+    <? elseif(!empty($success)): ?>
+        <div class ="success">
+            <span> The event 
+                <span class="event_time"><?=date("H:i",$success['start_time']);?></span> 
+                - 
+                <span class="event_time"><?=date("H:i",$success['end_time']);?></span> has been updated.
+            </span><br><br>
+            <script> opener.location.reload(true) </script>    
+        </div>     
+    <? endif; ?>            
+        
+     <div class ='field'>
+            <div class='outer title'><div class='inner'>When:</div></div> 
+            <div class='outer'>
+                <input class='inner' type="text" name="formData[start_edit_time]" maxlength="5" size="4" 
+                       value ="<?=date('H:i',$book->start_time)?>" > 
+            </div>
+            <div class='outer title'><div class='inner'>-</div></div> 
+            <div class='outer'>
+                <input class='inner' type="text" name="formData[end_edit_time]" maxlength="5" size="4"
+                       value ="<?=date('H:i',$book->end_time)?>" > 
+            </div>
+            <div class='clear'></div>
+        </div>
+        <div class ='field'>
+            <div class='outer title'><div class='inner'>Notes:</div></div> 
+            <div class='outer'>
+                <textarea class='inner' name="formData[note]"><?=$book->note?></textarea>
+                
+            </div> 
+            <div class='clear'></div>
+        </div>
+        <div class ='field'>
+            <div class='outer title'><div class='inner'>Who:</div></div> 
+            <div class='outer'>
+                 <select class='inner' name="formData[employee_id]" >
+                    <? foreach($employees as $employee): ?>
+                        <option value="<?=$employee->id?>" <? if(isset($book->employee_id) && $employee->id == $book->employee_id ): ?> selected <? endif;?> >
+                    <?=$employee->name?>
+                        </option>
+                    <? endforeach; ?>
+                 </select> 
+            </div> 
+            <div class='clear'></div>
+             
+        </div>
+          <div><span class='bold'>submitted:</span>&nbsp;<?=$book->add_date?></div>
+          
+            <? if($book->recurring): ?>
+                <div id="recurring" class='bold'>
+                    <input id="IsRec" type="checkbox" name="formData[recurring]" value="1">Apply to all occurrences?<br>
+                </div>
+            <? endif; ?>
+          <div id="wrap_buttons">
+                <div class="button">
+                    <a href="#" onclick="document.getElementById('statistic_form').submit(); return false;"> UPDATE </a>
+                </div>
+               <? if($book->recurring): ?> 
+                    <div class="button">
+                         <a href="<?=PRJ_URL?>/index/DeleteBook/id/<?=$book->id?>/recurring_id/<?=$book->recurring_id?>" onclick="deleteBook(document.getElementById('IsRec'),this.href); return false;"> DELETE </a>
+                    </div>
+                <? else: ?>
+                     <div class="button">
+                         <a href="<?=PRJ_URL?>/index/DeleteBook/id/<?=$book->id?>" onclick="deleteBook(false,this.href); return false;"> DELETE </a>
+                    </div>
+                <? endif; ?>
+          </div>
+          <div class='clear'></div>
+    </div>
+<? else: ?>
+    <span>record was not found</span>
+<? endif ?>
+    
+       
+
+    
+    
+    
+</form>    
+    
+    
+    
+    
+</div>
+
+
+

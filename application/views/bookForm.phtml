@@ -1,0 +1,165 @@
+<div id="header_bookform">
+		<h1>Boardroom Booker</h1>
+                <h2 id="currentroom"><a href="<?=PRJ_URL?>/index/index/boardroom/<?=$boardroom?>"> Boardroom <?=$boardroom?> </a></h2>
+</div>
+
+<form id="bookform" action="<?=PRJ_URL?>/index/bookInsert" method="post">
+       
+     <? if (!empty($employees)): ?> 
+        <div class ="error" >
+            <? if (!empty($error)): ?>
+                <? foreach ($error->getMsgsArr() as $msg): ?>
+                    <?=$msg ?><br>
+                <? endforeach; ?>
+           <? endif; ?>         
+        </div> 
+        <? if(!empty($success)): ?>
+            <div class ="success">
+                <span> The event 
+                    <span class="event_time"><?=date("H:i",$success['start_time']);?></span> 
+                    - 
+                    <span class="event_time"><?=date("H:i",$success['end_time']);?></span> has been added.
+                </span><br><br>
+                <? if(!empty($success['note'])): ?> 
+                <span>The text for this event is <span id="success_text"><?=$success['note']?></span></span><br> 
+                <? endif; ?>
+            </div>     
+        <? endif; ?>        
+             
+    <div> <input type="hidden" name="formData[boardroom]" value="<?=$boardroom?>" /> </div>
+    <div>1. Booked for: </div>
+    <div>
+      
+        <select name="formData[employee_id]" >
+              <? foreach($employees as $employee): ?>
+                 <option value="<?=$employee->id?>" <? if(isset($formData['employee_id']) && $employee->id == $formData['employee_id'] ): ?> selected <? endif;?> >
+                     <?=$employee->name?>
+                 </option>
+              <? endforeach; ?>
+         </select>
+       
+        
+    </div>
+    <div>2. I would like to book this meeting:</div>
+    <div>
+                        <select name="formData[month]">
+                                <? foreach(Calendar::getMonths() as $num=>$month): ?>
+                                    <option value="<?=$num?>" <? if(isset($formData['month']) && $num == $formData['month'] ): ?> selected <? endif;?> >
+                                        <?=$month?>
+                                    </option>
+                                <? endforeach; ?>
+                        </select>
+                        <select name="formData[day]" >
+                                <? foreach(range(1, 31) as $num): ?>
+                                    <option value="<?=$num?>" <? if(isset($formData['day']) && $num == $formData['day'] ): ?> selected <? endif;?>>
+                                        <?=$num?>
+                                    </option>
+                                <? endforeach; ?>
+                               
+                        </select>
+                        <select name="formData[year]" >
+                                <? foreach(range(date('Y'), date('Y')+1) as $num): ?>
+                                    <option value="<?=$num?>" <? if(isset($formData['year']) && $num == $formData['year'] ): ?> selected <? endif;?> >
+                                        <?=$num?>
+                                    </option>
+                                <? endforeach; ?>
+                        </select>
+    </div>
+    <div>3. Specify what the time and end of the meeting (This will be what people see on the calendar.):</div>
+    <div>
+        <select name="formData[start_hours]" >
+            <? foreach(range(1, 12) as $num): ?>
+                <option value="<?=$num?>" <? if(isset($formData['start_hours']) && $num == $formData['start_hours'] ): ?> selected <? endif;?> >
+                    <?=$num?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        <select name="formData[start_minutes]">
+            <? foreach(range(0, 50,10) as $num): ?>
+                <option value="<?=$num?>" <? if(isset($formData['start_minutes']) && $num == $formData['start_minutes'] ): ?> selected <? endif;?>>
+                    <?=$num?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        <select name="formData[start_am_pm]">
+                <option value="AM" <? if(isset($formData['start_am_pm']) && "AM" == $formData['start_am_pm'] ): ?> selected <? endif;?>>
+                    AM
+                </option>
+                <option value="PM" <? if(isset($formData['start_am_pm']) && "PM" == $formData['start_am_pm'] ): ?> selected <? endif;?>>
+                    PM
+                </option>
+        </select>
+    </div>
+    <div>
+         <select name="formData[end_hours]" >
+            <? foreach(range(1, 12) as $num): ?>
+                <option value="<?=$num?>" <? if(isset($formData['end_hours']) && $num == $formData['end_hours'] ): ?> selected <? endif;?>>
+                    <?=$num?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        <select name="formData[end_minutes]">
+            <? foreach(range(0, 50,10) as $num): ?>
+                <option value="<?=$num?>" <? if(isset($formData['end_minutes']) && $num == $formData['end_minutes'] ): ?> selected <? endif;?>>
+                    <?=$num?>
+                </option>
+            <? endforeach; ?>
+        </select>
+        <select name="formData[end_am_pm]">
+                <option value="AM" <? if(isset($formData['end_am_pm']) && "AM" == $formData['end_am_pm'] ): ?> selected <? endif;?>>
+                    AM
+                </option>
+                <option value="PM"  <? if(isset($formData['end_am_pm']) && "PM" == $formData['end_am_pm'] ): ?> selected <? endif;?>>
+                    PM
+                </option>
+        </select>
+    </div>
+    <div>4. Enter the specifics for the meeting (This wil be what people see when they click on an event link.):</div>
+    <div>
+        <textarea name="formData[note]" cols="35" rows="5"><?if(!empty($formData['note'])):?><?=$formData['note']?><?endif;?></textarea>
+    </div>
+    <div>5. Is this going to be a recurring event?</div>
+    <div>
+        <input type="radio" name="formData[recurring]" onclick="enableDisable(this);" value="0"
+            <? if(!isset($formData['recurring'])): ?> checked <? endif;?>   
+            <? if(isset($formData['recurring']) && !$formData['recurring']): ?> checked <? endif;?> />
+        <span> no</span><br/>
+        <input type="radio" name="formData[recurring]" onclick="enableDisable(this);" value="1" 
+            <? if(isset($formData['recurring']) && $formData['recurring']): ?> checked <? endif;?> />       
+               <span> yes</span>
+    </div>
+    <div>6. If it is recurring, specify weekly, bi-weekly or monthly.</div>
+    <div>
+        <input type="radio" class="enable_disable"  name="formData[recurring_type]" value="weekly"
+            <? if( !isset($formData['recurring']) or (isset($formData['recurring']) && !$formData['recurring']) ): ?> disabled="" <? endif;?>      
+            <? if(isset($formData['recurring_type']) && $formData['recurring_type'] == "weekly"  ): ?> checked <? endif;?> />
+        <span> weekly</span><br/>
+        <input type="radio" class="enable_disable"  name="formData[recurring_type]" value="bi-weekly"
+           <? if( !isset($formData['recurring']) or (isset($formData['recurring']) && !$formData['recurring']) ): ?> disabled="" <? endif;?>      
+            <? if(isset($formData['recurring_type']) && $formData['recurring_type'] == "bi-weekly"  ): ?> checked <? endif;?> />
+        <span> bi-weekly</span><br/>
+        <input type="radio" class="enable_disable"  name="formData[recurring_type]" value="monthly"
+            <? if( !isset($formData['recurring']) or (isset($formData['recurring']) && !$formData['recurring']) ): ?> disabled="" <? endif;?>  
+            <? if(isset($formData['recurring_type']) && $formData['recurring_type'] == "monthly"  ): ?> checked <? endif;?> />
+        <span> monthly</span>
+    </div>
+    <div>
+       If weekly or bi-weeekly, specify the number of weeks for 
+       it to keep recurring. If monthly, specify the number of month. 
+       (If you choose "bi-weekly" and put in an odd number of weeks,
+       the computer will round down.)
+    </div>
+    <div>
+        <input type="text" class="enable_disable"  name="formData[recurring_num]" maxlength="1" size="4"
+                 <? if( !isset($formData['recurring']) or (isset($formData['recurring']) && !$formData['recurring']) ): ?> disabled="" <? endif;?>  
+               value ="<?if(isset($formData['recurring_num'])):?><?=$formData['recurring_num']?><?endif ?>"/>
+        <span>&nbsp;&nbsp;duration (max 4 weeks)</span>
+    </div>
+    <div>
+        
+        <input type="button"  value="Submit" onclick="validateBookForm();" />
+    </div>
+        <? else: ?>
+            <div>No employees in the database</div>
+        <? endif ?>
+</form>

@@ -1,0 +1,15 @@
+
+
+
+<form id="auth" action="<?=PRJ_URL?>/index/auth" method="post" >
+     <div class='fild'>
+        <? if (!empty($error)): ?>
+        <?=$error?>
+        <? endif; ?>
+    </div>
+    <div class='fild'><div class='fild_name'>Login: </div><input type ="text" name="user" value="" /><div class='clear'></div></div>
+    <div class='fild'><div class='fild_name'>Password: </div><input type ="password" name="password" value="" /><div class='clear'></div></div>
+  
+    <input type= "submit"  value="Submit"  />
+   
+</form>
